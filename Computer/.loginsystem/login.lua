@@ -63,8 +63,5 @@ while nologin do
         print("Incorrect Username")
     end    
 end
-local curuserfile = fs.open(".loginsystem/currentuser", "w")
-_CURRENT_USER = curuserfile.read()
-curuserfile.close()
 
 shell.run("./AtlasOS/MainMenu.lua")
