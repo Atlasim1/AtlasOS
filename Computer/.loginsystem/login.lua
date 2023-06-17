@@ -27,7 +27,7 @@ end
 -- Check for login file on disk
 if fs.exists("disk/.loginkey") then
     loginkey = fs.open("disk/.loginkey", "r")
-    if string.find(loginkey.read(), fs.open(".loginsystem/validkeys", "r").read()) ~= nil then -- If has valid Key
+    if string.match(loginkey.read(), fs.open(".loginsystem/validkeys", "r").read()) == loginkey.read() then -- If has valid Key
         if fs.exists("disk/autorun.lua") then -- If disk Has Autorun
             shell.openTab("shell")
             shell.run("disk/autorun.lua")
@@ -44,10 +44,10 @@ end
 while nologin do
     print("Username > ")
     local username = io.read()
-    if string.find(username, fs.open(".loginsystem/userlist", "r").read()) ~= nil then
+    if string.match(username, fs.open(".loginsystem/userlist", "r").read()) == username then
         print("Password > ")
         local password = io.read()
-        if string.find(username .. " - " .. password, fs.open(".loginsystem/passlist", "r").read()) ~= nil then
+        if string.find(username .. " - " .. password, fs.open(".loginsystem/passlist", "r").read()) == username .. " - " .. password then
             print("Welcome", username)
             sleep(2)
             shell.openTab("shell")
@@ -64,4 +64,4 @@ while nologin do
     end    
 end
 
-shell.run("./AtlasOS/MainMenu.lua")
+shell.run("shell")
