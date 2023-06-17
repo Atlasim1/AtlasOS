@@ -47,8 +47,8 @@ while nologin do
     if fs.open(".loginsystem/userlist", "r").readAll():find(username) then
         print("Password > ")
         local password = io.read()
-        print(username .. " - " .. password)
-        if fs.open(".loginsystem/passlist", "r").readAll():find(username .. " - " .. password) then
+        userpluspass = username .. " : " .. password
+        if fs.open(".loginsystem/passlist", "r").readAll():find(userpluspass) then
             print("Welcome", username)
             sleep(2)
             shell.openTab("shell")
