@@ -17,7 +17,7 @@ shell.setAlias("logout", "/.loginsystem/logout.lua")
 -- Check if user is logged in
 if fs.exists(".loginsystem/currentuser") then
     local curuser = fs.open(".loginsystem/currentuser", "r")
-    print("Logged in as", curuser.read())
+    print("Logged in as", curuser.readAll())
     curuser.close()
     sleep(2)
     shell.openTab("shell")
@@ -27,7 +27,7 @@ end
 -- Check for login file on disk
 if fs.exists("disk/.loginkey") then
     loginkey = fs.open("disk/.loginkey", "r")
-    if string.match(loginkey.read(), fs.open(".loginsystem/validkeys", "r").read()) == loginkey.read() then -- If has valid Key
+    if fs.open(".loginsystem/validkeys", "r").readAll():find(loginkey.readAll())
         if fs.exists("disk/autorun.lua") then -- If disk Has Autorun
             shell.openTab("shell")
             shell.run("disk/autorun.lua")
@@ -44,10 +44,10 @@ end
 while nologin do
     print("Username > ")
     local username = io.read()
-    if string.match(username, fs.open(".loginsystem/userlist", "r").read()) == username then
+    if fs.open(".loginsystem/userlist", "r").readAll():find(username) then
         print("Password > ")
         local password = io.read()
-        if string.find(username .. " - " .. password, fs.open(".loginsystem/passlist", "r").read()) == username .. " - " .. password then
+        if fs.open(".loginsystem/passlist","r").readAll():find(username .. " - " .. password) then
             print("Welcome", username)
             sleep(2)
             shell.openTab("shell")
