@@ -27,7 +27,7 @@ end
 -- Check for login file on disk
 if fs.exists("disk/.loginkey") then
     loginkey = fs.open("disk/.loginkey", "r")
-    if fs.open(".loginsystem/validkeys", "r").readAll():find(loginkey.readAll())
+    if fs.open(".loginsystem/validkeys", "r").readAll():find(loginkey.readAll()) then
         if fs.exists("disk/autorun.lua") then -- If disk Has Autorun
             shell.openTab("shell")
             shell.run("disk/autorun.lua")
@@ -47,7 +47,8 @@ while nologin do
     if fs.open(".loginsystem/userlist", "r").readAll():find(username) then
         print("Password > ")
         local password = io.read()
-        if fs.open(".loginsystem/passlist","r").readAll():find(username .. " - " .. password) then
+        print(username .. " - " .. password)
+        if fs.open(".loginsystem/passlist", "r").readAll():find(username .. " - " .. password) then
             print("Welcome", username)
             sleep(2)
             shell.openTab("shell")

@@ -18,7 +18,7 @@ userlist.write("user")
 userlist.close()
 
 local passfile = fs.open(".loginsystem/passlist", "w")
-passfile.write("user - password")
+passfile.write("user : password")
 passfile.close()
 
 local diskkeyfile = fs.open(".loginsystem/validkeys", "w")
